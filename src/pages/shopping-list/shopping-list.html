@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form #f="ngForm" (ngSubmit)="onAddItem(f)">
     <ion-list>
       <ion-item>
         <ion-label fixed>Name</ion-label>
@@ -32,6 +32,13 @@
       ion-button
       type="submit"
       block
-      >Add Item</button>
+      [disabled]="!f.valid">Add Item</button>
   </form>
+
+  <ion-list>
+    <ion-item *ngFor="let item of listItems; let i = index" (click)="onCheckItem(i)">
+      <h3>{{ item.name }} ({{ item.amount }})</h3>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
